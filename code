@@ -6,3 +6,4 @@ int main() {
     scanf("%s", &ta_mere);
     return 0;
 }
+git config --global user.name "Julian-Ezy" ; git config --global user.email "julian-ezy@example.com"
