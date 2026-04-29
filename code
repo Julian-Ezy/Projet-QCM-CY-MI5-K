@@ -1,0 +1,6 @@
+#include <stdio.h>
+
+int main() {
+    printf("j'en peux plus go valo");
+    return 0;
+}
