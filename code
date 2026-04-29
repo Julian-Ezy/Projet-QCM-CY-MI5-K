@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 int main() {
+    int ta_mere;
     printf("j'en peux plus go valo");
+    scanf("%s", &ta_mere);
     return 0;
 }
