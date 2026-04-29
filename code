@@ -4,3 +4,4 @@ int main() {
     printf("j'en peux plus go valo");
     return 0;
 }
+git config --global user.name "Julian-Ezy" ; git config --global user.email "julian-ezy@example.com"
