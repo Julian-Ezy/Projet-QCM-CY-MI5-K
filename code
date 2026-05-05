@@ -1,8 +1,28 @@
 #include <stdio.h>
 
+void fonction_option1() {
+}
+
+void fonction_option2() {
+}
+
+void choix_utilisateur() {
+    int choix;
+    printf("Choisissez un mode :\n");
+    printf("1. etudiant\n");
+    printf("2. enseignant\n");
+    printf("Vous choisissez \"1\" ou \"2\" ? : ");
+    scanf("%d", &choix);
+    if (choix == 1) {
+        fonction_option1();
+    } else if (choix == 2) {
+        fonction_option2();
+    } else {
+        printf("Choix invalide. Veuillez choisir \"1\" ou \"2\".\n");
+    }
+}
+
 int main() {
-    int ta_mere;
-    printf("j'en peux plus go valo");
-    scanf("%s", &ta_mere);
+    choix_utilisateur();
     return 0;
 }
