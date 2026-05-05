@@ -20,23 +20,28 @@ int choix;
 }
 
 void enseignant_mdp() {
-    int mdp;
+    int rep;
     do{     
     printf("Rentrez le mot de passe pour pouvoir continuer:\n");
-    scanf("%d", &mdp);
-    if (mdp == 182426) {
+    printf("Ou bien taper 0 pour revenir en arriere:\n");
+    scanf("%d", &rep);
+    if (rep == 182426) {
         fonction_enseignant();
+        return 0;
+    } else if (rep == 0) {
+        choix_utilisateur();
+        return 0;
     } else {
         printf("Mot de passe incorrect.\n");
     }
-    } while (mdp != 182426);
+    } while (rep != 182426 && rep != 0);
 }
 
 
 void choix_utilisateur() {
     int choix;
 
-    printf("Choisissez une option :\n");
+    printf("\nChoisissez une option :\n");
     printf("1. Acceder au mode etudiant\n");
     printf("2. Acceder au mode enseignant\n");
     printf("3. Quitter\n");
@@ -49,7 +54,7 @@ void choix_utilisateur() {
             enseignant_mdp();
         } else if (choix == 3) {
             printf("Au revoir !\n");
-            break;
+            return 0;
         } else {
            printf("Choix invalide. Veuillez choisir \"1\" , \"2\" ou \"3\".\n");
         }
