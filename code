@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 void fonction_etudiant() {
 }
@@ -6,10 +7,20 @@ void fonction_etudiant() {
 void creer_qcm() {
 }
 
-void modif_mdp() {
+void modif_mdp(char *mdp_ptr) {
+    char nv_mdp[20];
+    do {
+        printf("Rentrez le nouveau mot de passe : ");
+        scanf("%s", nv_mdp);
+        if (strcmp(nv_mdp, "0") == 0) {
+            printf("Le mot de passe ne peut pas être '0'. Veuillez en choisir un autre.\n");
+        }
+    } while (strcmp(nv_mdp, "0") == 0);
+    strcpy(mdp_ptr, nv_mdp);
+    printf("Mot de passe changé avec succès! Nouveau mot de passe : %s\n", mdp_ptr);
 }
 
-void fonction_enseignant() {
+void fonction_enseignant(char *mdp_ptr) {
 int choix;
     printf("Que voulez-vous faire ?\n");
     printf("1. Créer un QCM\n");
@@ -19,38 +30,38 @@ int choix;
     scanf("%d", &choix);
     if (choix == 1) {
         creer_qcm();
-        return 0;
+        return;
     } else if (choix == 2) {
-        modif_mdp();
-        return 0;
+        modif_mdp(mdp_ptr);
+        return;
     } else if (choix == 3) {
-        enseignant_mdp();
-            
+        enseignant_mdp(mdp_ptr);
+        return;
     } else {
         printf("Choix invalide. Veuillez choisir \"1\" ou \"2\".\n");
     }
 }
 
-void enseignant_mdp() {
-    int rep;
+void enseignant_mdp(char *mdp_ptr) {
+    char rep[20];
     do{     
     printf("\nRentrez le mot de passe pour pouvoir continuer\n");
     printf("Ou bien taper 0 pour revenir en arriere : \n");
-    scanf("%d", &rep);
-    if (rep == 182426) {
-        fonction_enseignant();
-        return 0;
-    } else if (rep == 0) {
-        choix_utilisateur();
-        return 0;
+    scanf("%s", rep);
+    if (strcmp(rep, mdp_ptr) == 0) {
+        fonction_enseignant(mdp_ptr);
+        return;
+    } else if (strcmp(rep, "0") == 0) {
+        choix_utilisateur(mdp_ptr);
+        return;
     } else {
         printf("Mot de passe incorrect.\n");
     }
-    } while (rep != 182426 && rep != 0);
+    } while (strcmp(rep, mdp_ptr) != 0 && strcmp(rep, "0") != 0);
 }
 
 
-void choix_utilisateur() {
+void choix_utilisateur(char *mdp_ptr) {
     int choix;
 
     printf("\nChoisissez une option :\n");
@@ -63,10 +74,10 @@ void choix_utilisateur() {
         if (choix == 1) {
             fonction_etudiant();
         } else if (choix == 2) {
-            enseignant_mdp();
+            enseignant_mdp(mdp_ptr);
         } else if (choix == 3) {
             printf("Au revoir !\n");
-            return 0;
+            return;
         } else {
            printf("Choix invalide. Veuillez choisir \"1\" , \"2\" ou \"3\".\n");
         }
@@ -74,7 +85,7 @@ void choix_utilisateur() {
 }
 
 int main() {
-
-    choix_utilisateur();
+    char mdp[20] = "182426";
+    choix_utilisateur(mdp);
     return 0;
 }
