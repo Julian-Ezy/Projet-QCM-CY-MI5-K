@@ -3,17 +3,29 @@
 void fonction_etudiant() {
 }
 
+void creer_qcm() {
+}
+
+void modif_mdp() {
+}
+
 void fonction_enseignant() {
 int choix;
     printf("Que voulez-vous faire ?\n");
     printf("1. Créer un QCM\n");
     printf("2. Changer le mot de passe\n");
-    printf("Veuillez choisir \"1\" ou \"2\" : ");
+    printf("3. Revenir en arrière\n");
+    printf("Veuillez choisir \"1\" ou \"2\" ou \"3\" : ");
     scanf("%d", &choix);
     if (choix == 1) {
-        fonction_etudiant();
+        creer_qcm();
+        return 0;
     } else if (choix == 2) {
+        modif_mdp();
+        return 0;
+    } else if (choix == 3) {
         enseignant_mdp();
+            
     } else {
         printf("Choix invalide. Veuillez choisir \"1\" ou \"2\".\n");
     }
