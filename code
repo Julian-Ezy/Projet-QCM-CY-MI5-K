@@ -2,13 +2,17 @@
 #include <string.h>
 
 void fonction_etudiant() {
+
 }
 
 void creer_qcm() {
+
 }
 
 void modif_mdp(char *mdp_ptr) {
+    FILE *f;
     char nv_mdp[20];
+f = fopen("mdp.txt","w");
     do {
         printf("Rentrez le nouveau mot de passe : ");
         scanf("%s", nv_mdp);
@@ -18,6 +22,8 @@ void modif_mdp(char *mdp_ptr) {
     } while (strcmp(nv_mdp, "0") == 0);
     strcpy(mdp_ptr, nv_mdp);
     printf("Mot de passe changé avec succès! Nouveau mot de passe : %s\n", mdp_ptr);
+    fprintf(f,"%s", mdp_ptr);
+return;
 }
 
 void fonction_enseignant(char *mdp_ptr) {
