@@ -1,12 +1,25 @@
 #include <stdio.h>
 #include <string.h>
 
+
+
+
+
 void fonction_etudiant() {
 
 }
 
 void creer_qcm() {
-
+    char** question = (char**)malloc( 5 * sizeof(char*));
+for(int i = 0; i < 5 ; i++){
+     question[i] = (char*)malloc( 4 * sizeof(char));
+                 }
+for(int i = 0; i < 5 ; i++ ){
+printf("Saisir la première question");
+scanf("%s",question[i]);
+    printf ("Saisir la proposition");
+    
+}
 }
 
 void modif_mdp(char *mdp_ptr) {
@@ -18,8 +31,10 @@ f = fopen("mdp.txt","w");
         scanf("%s", nv_mdp);
         if (strcmp(nv_mdp, "0") == 0) {
             printf("Le mot de passe ne peut pas être '0'. Veuillez en choisir un autre.\n");
+        if (strcmp(nv_mdp, "\0") == 0) {
+            printf("Le mot de passe ne peut pas être vide. Veuillez en choisir un autre.\n");
         }
-    } while (strcmp(nv_mdp, "0") == 0);
+    } while (strcmp(nv_mdp, "0") == 0) && strcmp(nv_mdp, "\0") == 0))
     strcpy(mdp_ptr, nv_mdp);
     printf("Mot de passe changé avec succès! Nouveau mot de passe : %s\n", mdp_ptr);
     fprintf(f,"%s", mdp_ptr);
@@ -93,7 +108,11 @@ void choix_utilisateur(char *mdp_ptr) {
 }
 
 int main() {
-    char mdp[20] = "182426";
+    char mdp[20];
+    FILE *f;   
+    f = fopen("mdp.txt","r");
+    fgets(f,20,mdp);
+    
     choix_utilisateur(mdp);
     return 0;
 }
