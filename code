@@ -23,7 +23,8 @@ f = fopen("mdp.txt","w");
     strcpy(mdp_ptr, nv_mdp);
     printf("Mot de passe changé avec succès! Nouveau mot de passe : %s\n", mdp_ptr);
     fprintf(f,"%s", mdp_ptr);
-return;
+    fonction_enseignant(mdp_ptr);
+    return;
 }
 
 void fonction_enseignant(char *mdp_ptr) {
