@@ -1,14 +1,49 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
+typedef struct {
+    char QCM[500];
+    char proposition1[500];
+    char proposition2[500];
+    char proposition3[500];
+    char proposition4[500];
+} Question;
 
+typedef struct {
+question q1[5];
+question q2[5];
+question q3[5];
+question q4[5];
+question q5[5];
+}liste_qcm;
 
+// Il nous faut un fichier txt "Liste qcm" pour stocker les titres des qcm et proposer  
 
 
 void fonction_etudiant() {
 
 }
 
+void creer_qcm() {
+    Question *questions = (Question*)malloc(5 * sizeof(Question));
+    for(int i = 0; i < 5 ; i++){
+        printf("Saisir la question %d : ", i+1);
+        scanf("%s", questions[i].QCM);
+        printf("Saisir la proposition 1 pour la question %d : ", i+1);
+        scanf("%s", questions[i].proposition1);
+        printf("Saisir la proposition 2 pour la question %d : ", i+1);
+        scanf("%s", questions[i].proposition2);
+        printf("Saisir la proposition 3 pour la question %d : ", i+1);
+        scanf("%s", questions[i].proposition3);
+        printf("Saisir la proposition 4 pour la question %d : ", i+1);
+        scanf("%s", questions[i].proposition4);
+    }
+}
+
+
+
+// CLEMENT 
 void creer_qcm() {
     char** question = (char**)malloc( 5 * sizeof(char*));
 for(int i = 0; i < 5 ; i++){
@@ -24,31 +59,37 @@ scanf("%s",question[i]);
 
 void modif_mdp(char *mdp_ptr) {
     FILE *f;
+    f = fopen("mdp.txt", "w");
+    if (f == NULL) {
+        perror("Impossible d'ouvrir mdp.txt");
+        return;
+    }
+
     char nv_mdp[20];
-f = fopen("mdp.txt","w");
     do {
         printf("Rentrez le nouveau mot de passe : ");
-        scanf("%s", nv_mdp);
+        scanf("%19s", nv_mdp);
         if (strcmp(nv_mdp, "0") == 0) {
             printf("Le mot de passe ne peut pas être '0'. Veuillez en choisir un autre.\n");
-        if (strcmp(nv_mdp, "\0") == 0) {
+        } else if (nv_mdp[0] == '\0') {
             printf("Le mot de passe ne peut pas être vide. Veuillez en choisir un autre.\n");
         }
-    } while (strcmp(nv_mdp, "0") == 0) && strcmp(nv_mdp, "\0") == 0))
+    } while (strcmp(nv_mdp, "0") == 0 || nv_mdp[0] == '\0');
+
     strcpy(mdp_ptr, nv_mdp);
     printf("Mot de passe changé avec succès! Nouveau mot de passe : %s\n", mdp_ptr);
-    fprintf(f,"%s", mdp_ptr);
+    fprintf(f, "%s", mdp_ptr);
+    fclose(f);
     fonction_enseignant(mdp_ptr);
-    return;
 }
 
 void fonction_enseignant(char *mdp_ptr) {
-int choix;
+    int choix;
     printf("Que voulez-vous faire ?\n");
     printf("1. Créer un QCM\n");
     printf("2. Changer le mot de passe\n");
     printf("3. Revenir en arrière\n");
-    printf("Veuillez choisir \"1\" ou \"2\" ou \"3\" : ");
+    printf("Veuillez choisir \"1\" , \"2\" ou \"3\" : ");
     scanf("%d", &choix);
     if (choix == 1) {
         creer_qcm();
@@ -60,28 +101,27 @@ int choix;
         enseignant_mdp(mdp_ptr);
         return;
     } else {
-        printf("Choix invalide. Veuillez choisir \"1\" ou \"2\".\n");
+        printf("Choix invalide. Veuillez choisir \"1\" , \"2\" ou \"3\" : ");
     }
 }
 
 void enseignant_mdp(char *mdp_ptr) {
     char rep[20];
-    do{     
-    printf("\nRentrez le mot de passe pour pouvoir continuer\n");
-    printf("Ou bien taper 0 pour revenir en arriere : \n");
-    scanf("%s", rep);
-    if (strcmp(rep, mdp_ptr) == 0) {
-        fonction_enseignant(mdp_ptr);
-        return;
-    } else if (strcmp(rep, "0") == 0) {
-        choix_utilisateur(mdp_ptr);
-        return;
-    } else {
-        printf("Mot de passe incorrect.\n");
-    }
+    do {
+        printf("\nRentrez le mot de passe pour pouvoir continuer\n");
+        printf("Ou bien taper 0 pour revenir en arriere : \n");
+        scanf("%19s", rep);
+        if (strcmp(rep, mdp_ptr) == 0) {
+            fonction_enseignant(mdp_ptr);
+            return;
+        } else if (strcmp(rep, "0") == 0) {
+            choix_utilisateur(mdp_ptr);
+            return;
+        } else {
+            printf("Mot de passe incorrect.\n");
+        }
     } while (strcmp(rep, mdp_ptr) != 0 && strcmp(rep, "0") != 0);
 }
-
 
 void choix_utilisateur(char *mdp_ptr) {
     int choix;
@@ -91,8 +131,7 @@ void choix_utilisateur(char *mdp_ptr) {
     printf("2. Acceder au mode enseignant\n");
     printf("3. Quitter\n");
     printf("Vous choisissez \"1\" , \"2\" ou \"3\" ? : ");
-    do{
-        
+    do {
         scanf("%d", &choix);
         if (choix == 1) {
             fonction_etudiant();
@@ -102,17 +141,20 @@ void choix_utilisateur(char *mdp_ptr) {
             printf("Au revoir !\n");
             return;
         } else {
-           printf("Choix invalide. Veuillez choisir \"1\" , \"2\" ou \"3\".\n");
+            printf("Choix invalide. Veuillez choisir \"1\" , \"2\" ou \"3\".\n");
         }
     } while (choix != 1 && choix != 2 && choix != 3);
 }
 
 int main() {
-    char mdp[20];
-    FILE *f;   
-    f = fopen("mdp.txt","r");
-    fgets(f,20,mdp);
-    
+    char mdp[20] = "1234";
+    FILE *f = fopen("mdp.txt", "r");
+    if (f != NULL) {
+        if (fgets(mdp, sizeof(mdp), f) == NULL) {
+            strcpy(mdp, "1234");
+        }
+        fclose(f);
+    }
     choix_utilisateur(mdp);
     return 0;
 }
