@@ -144,7 +144,7 @@ void creer_qcm2() {
         if (f != NULL) {
             printf("Saisir la réponse pour la question %d : ", i + 1);
             scanf("%d", &questions[i].reponse);
-            fprintf(f, "%d", questions[i].reponse);
+            fprintf(f, "%d", questions[i].reponse); // rajouter la rep de 1 à 4
             fclose(f);
         } else {
             perror(filename);
@@ -152,22 +152,6 @@ void creer_qcm2() {
     }
 
     free(questions);
-}
-
-
-
-// CLEMENT 
-void creer_qcm1() {
-    char** question = (char**)malloc( 5 * sizeof(char*));
-for(int i = 0; i < 5 ; i++){
-     question[i] = (char*)malloc( 500 * sizeof(char));
-                 }
-for(int i = 0; i < 5 ; i++ ){
-printf("Saisir la première question");
-scanf("%s",question[i]);
-    printf ("Saisir la proposition");
-    
-}
 }
 
 void modif_mdp(char *mdp_ptr) {
