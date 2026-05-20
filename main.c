@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <string.h>
+#include "projet.h"
+
 int main() {
     char mdp[20] = "1234";
     int n;

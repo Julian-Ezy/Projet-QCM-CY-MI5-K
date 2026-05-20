@@ -28,7 +28,7 @@ typedef struct {
 // Il nous faut un fichier txt "Liste qcm" pour stocker les titres des qcm 
 // Si jamais on propose à l'étudiant de choisir son thème
 
-Parametre ParametreMenu(){
+Parametre parametre_menu(){
 int confirmation;
 Parametre t;
 do{
@@ -173,6 +173,7 @@ void creer_qcm2() {
 
     free(questions);
 }
+
 void creer_qcm1() {
     char nom_qcm[100];
     printf("Saisir le nom du qcm : ");
