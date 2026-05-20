@@ -16,7 +16,7 @@ void modif_mdp(char *mdp_ptr);
 void creer_qcm1();
 void creer_qcm2();
 Parametre parametre_menu();
-
+void creer_qcm();
 
 
 #endif

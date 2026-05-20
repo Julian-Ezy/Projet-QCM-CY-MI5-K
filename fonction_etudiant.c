@@ -12,10 +12,14 @@ void fonction_etudiant() {
         printf("erreur fichier");
         
     }
-while(fgets(s,100,f)) != NULL){
+do {
+    if (fgets(s,100,f) == NULL) {
+        break;
+    }
     printf("%d)  %s\n",i,s);
     i++;
-}
+} while(1);
+
     do{ 
         printf("Saisir le choix");
             scanf ("%d",&choix);
