@@ -16,7 +16,6 @@ void choix_utilisateur(char *mdp_ptr) {
         } else if (choix == 2) {
             enseignant_mdp(mdp_ptr);
         } else if (choix == 3) {
-            printf("Au revoir !\n");
             return;
         } else {
             printf("Choix invalide. Veuillez choisir \"1\" , \"2\" ou \"3\".\n");

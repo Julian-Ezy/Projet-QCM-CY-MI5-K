@@ -12,8 +12,9 @@ SRC = main.c \
       fonction_enseignant.c \
       fonction_etudiant.c \
       modif_mdp.c \
+	  creer_qcm.c \
       parametre_menu.c
-
+	  
 OBJ = $(SRC:.c=.o)
 
 $(TARGET): $(OBJ)
