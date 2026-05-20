@@ -374,6 +374,6 @@ int main() {
         if ( n == 2 ){
             choix_utilisateur(mdp);
         }
-    }while( ṇ != 1 && n != 2);
+    }while( n != 1 && n != 2);
     return 0;
 }
