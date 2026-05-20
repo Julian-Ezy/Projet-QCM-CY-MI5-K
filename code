@@ -3,6 +3,12 @@
 #include <string.h>
 
 typedef struct {
+int choix1;
+int choix2;
+int choix3;
+}Parametre;
+
+typedef struct {
     char qst[500];
     char proposition1[500];
     char proposition2[500];
@@ -22,11 +28,59 @@ typedef struct {
 // Il nous faut un fichier txt "Liste qcm" pour stocker les titres des qcm 
 // Si jamais on propose à l'étudiant de choisir son thème
 
+Parametre ParametreMenu(){
+int confirmation;
+Parametre t;
+do{
+        printf("---------- PARAMETRES --------- \n");
+    do{
+        printf (" Paramètre 1 : Voulez vous ajoutez la possibilité de mettre des points négatifs\n");
+            printf( " Si oui saisir 1 sinon 0\n");
+            scanf("%d",&t.choix1);
+    }while(t.choix1 != 0 && t.choix1 != 1);
 
+    do{
+        printf (" Paramètre 2 : Voulez vous ajouter la possibilité de passer les questions\n");
+            printf( " Si oui saisir 1 sinon 0\n");
+            scanf("%d",&t.choix2);
+    }while(t.choix2 != 0 && t.choix2 != 1);
+
+    do{
+        printf (" Paramètre 3 : Voulez vous ajouter la possibilité de mettre plusieurs propositions\n");
+            printf( " Si oui saisir 1 sinon 0\n");
+            scanf("%d",&t.choix3);
+    }while(t.choix3 != 0 && t.choix3 != 1);
+
+        printf("Les paramètres vous conviennent ils ?\n");
+        printf(" Si oui saisir 1, sinon 0\n");
+    scanf("%d",&confirmation);
+}while(confirmation == 0);
+return t;
+}
 
 void fonction_etudiant() {
-
+    char s[100];
+    int i = 1;
+    int choix;
+    printf("Choisir le quizz voulant etre fait");
+    FILE* f = fopen ("quizz.txt","r");
+    
+    if (f == NULL){
+        printf("erreur fichier");
+        
+    }
+while(fgets(s,100,f)) != NULL){
+    printf("%d)  %s\n",i,s);
+    i++;
 }
+    do{ 
+        printf("Saisir le choix");
+            scanf ("%d",&choix);
+    }while(choix > 1 && choix < i);
+    
+ fclose(f);
+}
+
 
 void creer_qcm2() {
     char nom_qcm[100];
@@ -34,7 +88,7 @@ void creer_qcm2() {
     scanf("%99s", nom_qcm);
 
     char filename[200];
-    sprintf(filename, "QCM_%s.txt", nom_qcm);
+    sprintf(filename, "QCM2_%s.txt", nom_qcm);
     FILE *f = fopen(filename, "w");
     if (f == NULL) {
         perror(filename);
@@ -50,7 +104,7 @@ void creer_qcm2() {
     }
 
     for (int i = 0; i < 5; i++) {
-        sprintf(filename, "QCM_%s_Q%d_qst.txt", nom_qcm, i + 1);
+        sprintf(filename, "QCM2_%s_Q%d_qst.txt", nom_qcm, i + 1);
         f = fopen(filename, "w");
         if (f != NULL) {
             printf("Saisir la question %d : ", i + 1);
@@ -61,7 +115,7 @@ void creer_qcm2() {
             perror(filename);
         }
 
-        sprintf(filename, "QCM_%s_Q%d_prop1.txt", nom_qcm, i + 1);
+        sprintf(filename, "QCM2_%s_Q%d_prop1.txt", nom_qcm, i + 1);
         f = fopen(filename, "w");
         if (f != NULL) {
             printf("Saisir la proposition 1 pour la question %d : ", i + 1);
@@ -72,7 +126,7 @@ void creer_qcm2() {
             perror(filename);
         }
 
-        sprintf(filename, "QCM_%s_Q%d_prop2.txt", nom_qcm, i + 1);
+        sprintf(filename, "QCM2_%s_Q%d_prop2.txt", nom_qcm, i + 1);
         f = fopen(filename, "w");
         if (f != NULL) {
             printf("Saisir la proposition 2 pour la question %d : ", i + 1);
@@ -83,7 +137,7 @@ void creer_qcm2() {
             perror(filename);
         }
 
-        sprintf(filename, "QCM_%s_Q%d_prop3.txt", nom_qcm, i + 1);
+        sprintf(filename, "QCM2_%s_Q%d_prop3.txt", nom_qcm, i + 1);
         f = fopen(filename, "w");
         if (f != NULL) {
             printf("Saisir la proposition 3 pour la question %d : ", i + 1);
@@ -94,7 +148,7 @@ void creer_qcm2() {
             perror(filename);
         }
 
-        sprintf(filename, "QCM_%s_Q%d_prop4.txt", nom_qcm, i + 1);
+        sprintf(filename, "QCM2_%s_Q%d_prop4.txt", nom_qcm, i + 1);
         f = fopen(filename, "w");
         if (f != NULL) {
             printf("Saisir la proposition 4 pour la question %d : ", i + 1);
@@ -105,12 +159,12 @@ void creer_qcm2() {
             perror(filename);
         }
 
-        sprintf(filename, "QCM_%s_Q%d_reponse.txt", nom_qcm, i + 1);
+        sprintf(filename, "QCM2_%s_Q%d_reponse.txt", nom_qcm, i + 1);
         f = fopen(filename, "w");
         if (f != NULL) {
             printf("Saisir la réponse pour la question %d : ", i + 1);
             scanf("%d", &questions[i].reponse);
-            fprintf(f, "%d", questions[i].reponse);
+            fprintf(f, "%d", questions[i].reponse); // rajouter la rep de 1 à 4
             fclose(f);
         } else {
             perror(filename);
@@ -119,21 +173,96 @@ void creer_qcm2() {
 
     free(questions);
 }
-
-
-
-// CLEMENT 
 void creer_qcm1() {
-    char** question = (char**)malloc( 5 * sizeof(char*));
-for(int i = 0; i < 5 ; i++){
-     question[i] = (char*)malloc( 500 * sizeof(char));
-                 }
-for(int i = 0; i < 5 ; i++ ){
-printf("Saisir la première question");
-scanf("%s",question[i]);
-    printf ("Saisir la proposition");
-    
-}
+    char nom_qcm[100];
+    printf("Saisir le nom du qcm : ");
+    scanf("%99s", nom_qcm);
+
+    char filename[200];
+    sprintf(filename, "QCM1_%s.txt", nom_qcm);
+    FILE *f = fopen(filename, "w");
+    if (f == NULL) {
+        perror(filename);
+        return;
+    }
+    fprintf(f, "%s\n", nom_qcm);
+    fclose(f);
+
+    Question *questions = malloc(5 * sizeof(Question));
+    if (questions == NULL) {
+        perror("Impossible d'allouer la mémoire");
+        return;
+    }
+
+    for (int i = 0; i < 5; i++) {
+        sprintf(filename, "QCM1_%s_Q%d_qst.txt", nom_qcm, i + 1);
+        f = fopen(filename, "w");
+        if (f != NULL) {
+            printf("Saisir la question %d : ", i + 1);
+            scanf("%499s", questions[i].qst);
+            fputs(questions[i].qst, f);
+            fclose(f);
+        } else {
+            perror(filename);
+        }
+
+        sprintf(filename, "QCM1_%s_Q%d_prop1.txt", nom_qcm, i + 1);
+        f = fopen(filename, "w");
+        if (f != NULL) {
+            printf("Saisir la proposition 1 pour la question %d : ", i + 1);
+            scanf("%499s", questions[i].proposition1);
+            fputs(questions[i].proposition1, f);
+            fclose(f);
+        } else {
+            perror(filename);
+        }
+
+        sprintf(filename, "QCM1_%s_Q%d_prop2.txt", nom_qcm, i + 1);
+        f = fopen(filename, "w");
+        if (f != NULL) {
+            printf("Saisir la proposition 2 pour la question %d : ", i + 1);
+            scanf("%499s", questions[i].proposition2);
+            fputs(questions[i].proposition2, f);
+            fclose(f);
+        } else {
+            perror(filename);
+        }
+
+        sprintf(filename, "QCM1_%s_Q%d_prop3.txt", nom_qcm, i + 1);
+        f = fopen(filename, "w");
+        if (f != NULL) {
+            printf("Saisir la proposition 3 pour la question %d : ", i + 1);
+            scanf("%499s", questions[i].proposition3);
+            fputs(questions[i].proposition3, f);
+            fclose(f);
+        } else {
+            perror(filename);
+        }
+
+        sprintf(filename, "QCM1_%s_Q%d_prop4.txt", nom_qcm, i + 1);
+        f = fopen(filename, "w");
+        if (f != NULL) {
+            printf("Saisir la proposition 4 pour la question %d : ", i + 1);
+            scanf("%499s", questions[i].proposition4);
+            fputs(questions[i].proposition4, f);
+            fclose(f);
+        } else {
+            perror(filename);
+        }
+
+        sprintf(filename, "QCM1_%s_Q%d_reponse.txt", nom_qcm, i + 1);
+        f = fopen(filename, "w");
+        if (f != NULL) {
+            printf("Saisir la réponse pour la question %d : ", i + 1);
+            scanf("%d", &questions[i].reponse);
+            fprintf(f, "%d", questions[i].reponse); // rajouter la rep de 1 à 4
+            fclose(f);
+        } else {
+            perror(filename);
+        }
+    }
+
+    free(questions);
 }
 
 void modif_mdp(char *mdp_ptr) {
@@ -169,19 +298,21 @@ void fonction_enseignant(char *mdp_ptr) {
     printf("2. Changer le mot de passe\n");
     printf("3. Revenir en arrière\n");
     printf("Veuillez choisir \"1\" , \"2\" ou \"3\" : ");
-    scanf("%d", &choix);
-    if (choix == 1) {
-        creer_qcm();
-        return;
-    } else if (choix == 2) {
-        modif_mdp(mdp_ptr);
-        return;
-    } else if (choix == 3) {
-        enseignant_mdp(mdp_ptr);
-        return;
-    } else {
-        printf("Choix invalide. Veuillez choisir \"1\" , \"2\" ou \"3\" : ");
-    }
+    do{
+        scanf("%d", &choix);
+        if (choix == 1) {
+            creer_qcm();
+            return;
+        } else if (choix == 2) {
+            modif_mdp(mdp_ptr);
+            return;
+        } else if (choix == 3) {
+            enseignant_mdp(mdp_ptr);
+            return;
+        } else {
+            printf("Choix invalide. Veuillez choisir \"1\" , \"2\" ou \"3\" : ");
+        }
+    } while (choix != 1 && choix != 2 && choix != 3);
 }
 
 void enseignant_mdp(char *mdp_ptr) {
@@ -227,6 +358,7 @@ void choix_utilisateur(char *mdp_ptr) {
 
 int main() {
     char mdp[20] = "1234";
+    int n;
     FILE *f = fopen("mdp.txt", "r");
     if (f != NULL) {
         if (fgets(mdp, sizeof(mdp), f) == NULL) {
@@ -235,5 +367,13 @@ int main() {
         fclose(f);
     }
     choix_utilisateur(mdp);
+    do{
+        printf("\nVoulez vous quitter le programme ?");
+        printf("\nTapez \"1\" si oui et \"2\" sinon");
+        scanf("%d",&n);
+        if ( n == 2 ){
+            choix_utilisateur(mdp);
+        }
+    }while( ṇ != 1 && n != 2);
     return 0;
 }
