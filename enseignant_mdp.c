@@ -5,8 +5,8 @@
 void enseignant_mdp(char *mdp_ptr) {
     char rep[20];
     do {
-        printf("\nRentrez le mot de passe pour pouvoir continuer\n");
-        printf("Ou bien taper 0 pour revenir en arriere : \n");
+        printf("\n\n\n\n\n\nRentrez le mot de passe pour pouvoir continuer\n");
+        printf("Ou bien taper 0 pour revenir en arriere : ");
         scanf("%19s", rep);
         if (strcmp(rep, mdp_ptr) == 0) {
             fonction_enseignant(mdp_ptr);
@@ -15,7 +15,7 @@ void enseignant_mdp(char *mdp_ptr) {
             choix_utilisateur(mdp_ptr);
             return;
         } else {
-            printf("Mot de passe incorrect.\n");
+            printf("\nMot de passe incorrect.\n");
         }
     } while (strcmp(rep, mdp_ptr) != 0 && strcmp(rep, "0") != 0);
 }

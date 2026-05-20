@@ -5,7 +5,7 @@ void fonction_etudiant() {
     char s[100];
     int i = 1;
     int choix;
-    printf("Choisir le quizz voulant etre fait");
+    printf("Choisir le quizz voulant etre fait\n");
     FILE* f = fopen ("quizz.txt","r");
     
     if (f == NULL){
@@ -21,7 +21,7 @@ do {
 } while(1);
 
     do{ 
-        printf("Saisir le choix");
+        printf("Saisir le choix : ");
             scanf ("%d",&choix);
     }while(choix > 1 && choix < i);
     

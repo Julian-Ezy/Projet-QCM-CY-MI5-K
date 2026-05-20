@@ -14,13 +14,13 @@ int main() {
     }
     choix_utilisateur(mdp);
     do{
-        printf("\nVoulez vous quitter le programme ?");
+        printf("\n\n\n\nVoulez vous quitter le programme ?\n");
         printf("\nTapez \"1\" si oui et \"2\" sinon : ");
         scanf("%d",&n);
         if ( n == 2 ){
             choix_utilisateur(mdp);
         }
     }while( n != 1 );
-    printf("Au revoir !\n");
+    printf("Au revoir !\n\n\n");
     return 0;
 }

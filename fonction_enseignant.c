@@ -3,10 +3,10 @@
 
 void fonction_enseignant(char *mdp_ptr) {
     int choix;
-    printf("Que voulez-vous faire ?\n");
+    printf("\n\n\n\nQue voulez-vous faire ?\n\n");
     printf("1. Créer un QCM\n");
     printf("2. Changer le mot de passe\n");
-    printf("3. Revenir en arrière\n");
+    printf("3. Revenir en arrière\n\n");
     printf("Veuillez choisir \"1\" , \"2\" ou \"3\" : ");
     do{
         scanf("%d", &choix);
@@ -20,7 +20,7 @@ void fonction_enseignant(char *mdp_ptr) {
             enseignant_mdp(mdp_ptr);
             return;
         } else {
-            printf("Choix invalide. Veuillez choisir \"1\" , \"2\" ou \"3\" : ");
+            printf("\n\n\nChoix invalide. Veuillez choisir \"1\" , \"2\" ou \"3\" : ");
         }
     } while (choix != 1 && choix != 2 && choix != 3);
 }
