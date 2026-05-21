@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "projet.h"
+
 
 void fonction_etudiant() {
     char s[100];
@@ -12,19 +15,117 @@ void fonction_etudiant() {
         printf("erreur fichier");
         
     }
-    do {
-    if (fgets(s,100,f) == NULL) {
-        break;
+do{
+    if (fgets(s,100,f) != NULL) {
+        printf("%d)  %s\n",i,s);
+        
+    i++; 
     }
-    printf("%d)  %s\n",i,s);
-    i++;
-    } while(1);
+    else{
+   break;
+    }
+
+}while(1); 
+fclose(f);
+f = fopen("quizz.txt","r");
+char tabq[i-1];
+int x = 0;
+do{
+    if (fgets(s,100,f) != NULL) {
+        tabq[x] = s;
+        
+    x++; 
+    }
+    else{
+   break;
+    }
+
+}while(1); 
+fclose(f);
+
+char nom_qcm[100]
+for(int y = 0; y<i-1 ; y++){
+    if ( y == choix){
+        nom = tabq[choix]
+    }
+}
+int filename[200];
+char w[100];
+int rep, erep, res = 0;
+
+    for (int u = 0; u < 5; u++) {
+        
+        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_qst.txt", nom_qcm, u + 1);
+        f = fopen(filename, "r");
+        if (f != NULL) {
+           fgets(w,100,f);
+           printf("\n\nQuestion %d : %s \n",u+1,w);
+            fclose(f);
+        } else {
+            perror(filename);
+        }
+
+        for (int t = 0; t < 4; t++) {
+            snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_prop%d.txt", nom_qcm, u + 1, t + 1);
+            f = fopen(filename, "r");
+            if (f != NULL) {
+                fgets(w,100,f);
+                printf("Proposition %d : %s", t , w);
+                fclose(f);
+            } else {
+                perror(filename);
+            }
+        }
+
+        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_reponse.txt", nom_qcm, u + 1);
+        f = fopen(filename, "r");
+        if (f != NULL) {
+          rep = fgetc (f);
+        printf(" Veuillez choisir la reponse : ");
+        scanf("%d",&erep);
+        if(erep == rep){
+                res++;
+        }
+        else if(erep == 0){   
+        }
+        else {
+            if(p3)
+            res--;
+        }
+            fclose(f);
+        } else {
+            perror(filename);
+        }
+    }
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     if (i == 1) {
         printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nAucun quizz disponible.\n");
         fclose(f);
         printf("\nChoisissez :\n\n \"1\" pour revenir au menu etudiant \n \"2\" sinon\n\n");
-    int n, i = 0;
+    int n, j = 0;
     do {
         scanf("%d", &n);
         if (n == 1) {
@@ -33,7 +134,7 @@ void fonction_etudiant() {
         } else if (n == 2) {
             return;
         } else {
-            if (i == 0) {
+            if (j == 0) {
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoix invalide.\n");
             } 
             else {
@@ -43,7 +144,7 @@ void fonction_etudiant() {
                 printf("\nWow, ce type n'a rien d'autre à faire de sa journée\n");
             }
             printf("\nVeuillez choisir :\n\n \"1\" pour revenir au menu etudiant \n \"2\" sinon\n\n");
-            i++;
+            j++;
         }
     } while (n != 1 && n != 2);
         return;

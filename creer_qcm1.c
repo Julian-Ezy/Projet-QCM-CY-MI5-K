@@ -33,6 +33,8 @@ void creer_qcm1() {
     }
     fprintf(f, "%s\n", nom_qcm);
     fclose(f);
+
+    
 // creation du tableau des questions 
     Question *questions = malloc(5 * sizeof(Question));
     if (questions == NULL) {

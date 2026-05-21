@@ -12,6 +12,7 @@ int main() {
         }
         fclose(f);
     }
+    
     choix_utilisateur(mdp);
     do{
         printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nVoulez vous quitter le programme ?\n");
