@@ -4,8 +4,8 @@
 
 void creer_qcm() {
     if (parametre_menu().choix3 == 1) {
-        creer_qcm1();
-    } else {
         creer_qcm2();
+    } else {
+        creer_qcm1();
     }
 }

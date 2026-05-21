@@ -1,16 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "projet.h"
-
+// structure proposition des questions
 typedef struct {
     char qst[500];
-    char proposition1[500];
-    char proposition2[500];
-    char proposition3[500];
-    char proposition4[500];
+    char propositions[4][500]; 
     int reponse;
 } Question;
 
+// structure des questions incluant les propositions
 typedef struct {
     Question q1[5];
     Question q2[5];
@@ -20,9 +19,11 @@ typedef struct {
 } QCM;
 
 void creer_qcm1() {
+    //nom QCM
     char nom_qcm[100];
     printf("Saisir le nom du qcm : ");
     scanf("%99s", nom_qcm);
+
     char filename[200];
     snprintf(filename, sizeof(filename), "QCM1_%s.txt", nom_qcm);
     FILE *f = fopen(filename, "w");
@@ -32,14 +33,17 @@ void creer_qcm1() {
     }
     fprintf(f, "%s\n", nom_qcm);
     fclose(f);
-
+// creation du tableau des questions 
     Question *questions = malloc(5 * sizeof(Question));
     if (questions == NULL) {
         perror("Impossible d'allouer la mémoire");
         return;
     }
 
+    // Boucle 5 questions
     for (int i = 0; i < 5; i++) {
+        
+    //question
         snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_qst.txt", nom_qcm, i + 1);
         f = fopen(filename, "w");
         if (f != NULL) {
@@ -51,56 +55,28 @@ void creer_qcm1() {
             perror(filename);
         }
 
-        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_prop1.txt", nom_qcm, i + 1);
-        f = fopen(filename, "w");
-        if (f != NULL) {
-            printf("Saisir la proposition 1 pour la question %d : ", i + 1);
-            scanf("%499s", questions[i].proposition1);
-            fputs(questions[i].proposition1, f);
-            fclose(f);
-        } else {
-            perror(filename);
+    //boucle proposition
+        for (int j = 0; j < 4; j++) {
+            snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_prop%d.txt", nom_qcm, i + 1, j + 1);
+            f = fopen(filename, "w");
+            if (f != NULL) {
+                printf("Saisir la proposition %d pour la question %d : ", j + 1, i + 1);
+                // On utilise questions[i].propositions[j] grâce au tableau de tableaux
+                scanf("%499s", questions[i].propositions[j]);
+                fputs(questions[i].propositions[j], f);
+                fclose(f);
+            } else {
+                perror(filename);
+            }
         }
 
-        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_prop2.txt", nom_qcm, i + 1);
-        f = fopen(filename, "w");
-        if (f != NULL) {
-            printf("Saisir la proposition 2 pour la question %d : ", i + 1);
-            scanf("%499s", questions[i].proposition2);
-            fputs(questions[i].proposition2, f);
-            fclose(f);
-        } else {
-            perror(filename);
-        }
-
-        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_prop3.txt", nom_qcm, i + 1);
-        f = fopen(filename, "w");
-        if (f != NULL) {
-            printf("Saisir la proposition 3 pour la question %d : ", i + 1);
-            scanf("%499s", questions[i].proposition3);
-            fputs(questions[i].proposition3, f);
-            fclose(f);
-        } else {
-            perror(filename);
-        }
-
-        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_prop4.txt", nom_qcm, i + 1);
-        f = fopen(filename, "w");
-        if (f != NULL) {
-            printf("Saisir la proposition 4 pour la question %d : ", i + 1);
-            scanf("%499s", questions[i].proposition4);
-            fputs(questions[i].proposition4, f);
-            fclose(f);
-        } else {
-            perror(filename);
-        }
-
+//reponse
         snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_reponse.txt", nom_qcm, i + 1);
         f = fopen(filename, "w");
         if (f != NULL) {
             printf("Saisir la réponse pour la question %d : ", i + 1);
             scanf("%d", &questions[i].reponse);
-            fprintf(f, "%d", questions[i].reponse); // rajouter la rep de 1 à 4
+            fprintf(f, "%d", questions[i].reponse);
             fclose(f);
         } else {
             perror(filename);

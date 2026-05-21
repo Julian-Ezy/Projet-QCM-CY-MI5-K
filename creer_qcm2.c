@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "projet.h"
 
 typedef struct {
     char qst[500];
-    char proposition1[500];
-    char proposition2[500];
-    char proposition3[500];
-    char proposition4[500];
-    int reponse;
+    char propositions[4][500]; 
+    int reponses[2]; 
 } Question;
 
 typedef struct {
@@ -25,7 +23,7 @@ void creer_qcm2() {
     scanf("%99s", nom_qcm);
 
     char filename[200];
-    snprintf(filename, sizeof(filename), "QCM2_%s.txt", nom_qcm);
+    snprintf(filename, sizeof(filename), "QCM1_%s.txt", nom_qcm);
     FILE *f = fopen(filename, "w");
     if (f == NULL) {
         perror(filename);
@@ -40,11 +38,14 @@ void creer_qcm2() {
         return;
     }
 
+    
     for (int i = 0; i < 5; i++) {
-        snprintf(filename, sizeof(filename), "QCM2_%s_Q%d_qst.txt", nom_qcm, i + 1);
+        
+       
+        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_qst.txt", nom_qcm, i + 1);
         f = fopen(filename, "w");
         if (f != NULL) {
-            printf("Saisir la question %d : ", i + 1);
+            printf("\nSaisir la question %d : ", i + 1);
             scanf("%499s", questions[i].qst);
             fputs(questions[i].qst, f);
             fclose(f);
@@ -52,56 +53,33 @@ void creer_qcm2() {
             perror(filename);
         }
 
-        snprintf(filename, sizeof(filename), "QCM2_%s_Q%d_prop1.txt", nom_qcm, i + 1);
-        f = fopen(filename, "w");
-        if (f != NULL) {
-            printf("Saisir la proposition 1 pour la question %d : ", i + 1);
-            scanf("%499s", questions[i].proposition1);
-            fputs(questions[i].proposition1, f);
-            fclose(f);
-        } else {
-            perror(filename);
+      
+        for (int j = 0; j < 4; j++) {
+            snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_prop%d.txt", nom_qcm, i + 1, j + 1);
+            f = fopen(filename, "w");
+            if (f != NULL) {
+                printf("Saisir la proposition %d pour la question %d : ", j + 1, i + 1);
+                scanf("%499s", questions[i].propositions[j]);
+                fputs(questions[i].propositions[j], f);
+                fclose(f);
+            } else {
+                perror(filename);
+            }
         }
 
-        snprintf(filename, sizeof(filename), "QCM2_%s_Q%d_prop2.txt", nom_qcm, i + 1);
+      
+        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_reponse.txt", nom_qcm, i + 1);
         f = fopen(filename, "w");
         if (f != NULL) {
-            printf("Saisir la proposition 2 pour la question %d : ", i + 1);
-            scanf("%499s", questions[i].proposition2);
-            fputs(questions[i].proposition2, f);
-            fclose(f);
-        } else {
-            perror(filename);
-        }
+            // Saisie de la première réponse
+            printf("Saisir la première bonne réponse pour la question %d : ", i + 1);
+            scanf("%d", &questions[i].reponses[0]);
 
-        snprintf(filename, sizeof(filename), "QCM2_%s_Q%d_prop3.txt", nom_qcm, i + 1);
-        f = fopen(filename, "w");
-        if (f != NULL) {
-            printf("Saisir la proposition 3 pour la question %d : ", i + 1);
-            scanf("%499s", questions[i].proposition3);
-            fputs(questions[i].proposition3, f);
-            fclose(f);
-        } else {
-            perror(filename);
-        }
+            
+            printf("Saisir la deuxième bonne réponse pour la question %d : ", i + 1);
+            scanf("%d", &questions[i].reponses[1]);
 
-        snprintf(filename, sizeof(filename), "QCM2_%s_Q%d_prop4.txt", nom_qcm, i + 1);
-        f = fopen(filename, "w");
-        if (f != NULL) {
-            printf("Saisir la proposition 4 pour la question %d : ", i + 1);
-            scanf("%499s", questions[i].proposition4);
-            fputs(questions[i].proposition4, f);
-            fclose(f);
-        } else {
-            perror(filename);
-        }
-
-        snprintf(filename, sizeof(filename), "QCM2_%s_Q%d_reponse.txt", nom_qcm, i + 1);
-        f = fopen(filename, "w");
-        if (f != NULL) {
-            printf("Saisir la réponse pour la question %d : ", i + 1);
-            scanf("%d", &questions[i].reponse);
-            fprintf(f, "%d", questions[i].reponse); // rajouter la rep de 1 à 4
+            fprintf(f, "%d %d", questions[i].reponses[0], questions[i].reponses[1]);
             fclose(f);
         } else {
             perror(filename);
