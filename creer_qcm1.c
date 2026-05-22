@@ -41,6 +41,14 @@ void creer_qcm1(Parametre t) {
     fprintf(f, "%s\n", var);//première ligne du fichier portant le qcm  est le nom de celui-ci
     fclose(f);
 
+    FILE *k = fopen("quizz.txt", "a");
+    if (k == NULL) {
+        perror(filename);
+        return;
+    }
+    fprintf(k, "%s\n", var);
+    fclose(k);
+
     f = fopen(filename, "a");
     if (f != NULL) {
         fprintf(f, "%d\n", t.choix1);
