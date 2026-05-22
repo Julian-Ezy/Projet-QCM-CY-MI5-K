@@ -32,7 +32,7 @@ void fonction_etudiant() {
 
         if (f == NULL){
             printf("erreur fichier");
-
+            fclose(f);
         }
         else{
             char tabq[i-1][100];
@@ -84,7 +84,7 @@ void fonction_etudiant() {
                 printf("%de proposition : %s \n ",j,h);
             }
             if(p3 == 0){
-                fscanf("%d",&rep1);
+                fscanf(g,"%d",&rep1);
             }
             else if (p3 == 1){
                 fscanf(g,"%d",&rep1);
@@ -104,7 +104,7 @@ void fonction_etudiant() {
                     else if(p1 == 1){
                         if(erep1 != rep1){
                             if(erep1 == 0){
-                                res == res;
+                                res = res;
                             }
                             else{
                                 res--;
@@ -128,7 +128,7 @@ void fonction_etudiant() {
                     else if(p1 == 1){
                         if(erep1 != rep1 && erep1 != rep2){
                             if(erep1 == 0){
-                                res == res;
+                                res = res;
                             }
                             else{
                                 res--;
@@ -141,7 +141,7 @@ void fonction_etudiant() {
                     else if(p1 == 1){
                         if(erep2 != rep1 && erep2 != rep2){
                             if(erep2 == 0){
-                                res == res;
+                                res = res;
                             }
                             else{
                                 res--;
@@ -212,11 +212,10 @@ void fonction_etudiant() {
         fclose(k);
 
         } // fin du else (si le fichier des titres souvre)
-    fclose(f)
     // si le fichier s'ouvre pas ou qu'il est vide alors on arrive ici directement)
     if (i == 1) {
         printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nAucun quizz disponible.\n");
-        fclose(f);
+        
         
     int n, j = 0;
     do {
@@ -247,5 +246,4 @@ void fonction_etudiant() {
             scanf ("%d",&choix);
     }while(choix < 1 || choix >= i);
     
- fclose(f);
 }
