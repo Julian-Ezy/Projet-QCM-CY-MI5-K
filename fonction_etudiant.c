@@ -59,51 +59,44 @@ void fonction_etudiant() {
         }
     }
     char filename[200];
-    char w[100];
-    int rep, erep, res = 0;
+    int rep1,rep2, erep, res = 0;
 
-        for (int u = 0; u < 5; u++) {
-        
-            snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_qst.txt", nom_qcm, u + 1);
-            f = fopen(filename, "r");
-            if (f != NULL) {
-            fgets(w,100,f);
-            printf("\n\nQuestion %d : %s \n",u+1,w);
-            fclose(f);
-        } 
-        else {
-            perror(filename);
-        }
+        snprintf(filename,sizeof(filename),"QCM1_%s.txt",nom_qcm);
 
-        for (int t = 0; t < 4; t++) {
-            snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_prop%d.txt", nom_qcm, u + 1, t + 1);
-            f = fopen(filename, "r");
-            if (f != NULL) {
-                fgets(w,100,f);
-                printf("Proposition %d : %s", t , w);
-                fclose(f);
-            } else {
-                perror(filename);
-            }
-        }
+printf("Lancement du quizz suivant : %s",filename);
 
-        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_reponse.txt", nom_qcm, u + 1);
-        f = fopen(filename, "r");
-        if (f != NULL) {
-          rep = fgetc (f);
-        printf(" Veuillez choisir la reponse : ");
-        scanf("%d",&erep);
-        if(erep == rep){
-                res++;
-        }
-        else if(erep == 0){   
-        }
-        
-            fclose(f);
-        } else {
-            perror(filename);
-        }
+int propj,prop,count = 0;
+FILE* g;
+int p1,p2,p3;
+char h[100];
+g = fopen(filename,"r");
+    for(int o = 0; o<1;o++){
+        fgets(s,100,g);
     }
+    for(int v = 0; v < 3; v++){
+        fscanf("%d",&p1);
+    }
+    for(int i = 0; i<5; i++){
+        fgets(h,100,g);
+        printf("%de question : %s", i+1,h);
+            
+        for(int j = 0; j<4 ; j++){
+            fgets(h,100,g);
+            printf("%de proposition : %s \n ",j,h);
+        }
+do{
+    printf("Saisir la proposition correcte : ");
+    scanf("%d",&erep);
+}while( erep<1 || erep>4);
+ 
+prop = fscanf("%d",&h);
+if (erep)
+}
+
+ }
+}
+ }  
+
 
 
    
