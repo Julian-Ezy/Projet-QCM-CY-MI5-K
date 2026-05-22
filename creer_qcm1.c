@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "projet.h"
-// structure proposition des questions
+
+// structure pour enregistrer les données de l'utilisateur
 typedef struct {
     char qst[500];
     char propositions[4][500]; 
     int reponse;
 } Question;
 
-// structure des questions incluant les propositions
+// structure des 5 questions qui sont composés 
 typedef struct {
     Question q1[5];
     Question q2[5];
@@ -18,21 +19,39 @@ typedef struct {
     Question q5[5];
 } QCM;
 
-void creer_qcm1() {
-    //nom QCM
-    char nom_qcm[100];
-    printf("Saisir le nom du qcm : ");
-    scanf("%99s", nom_qcm);
+void creer_qcm1(Parametre t) {
 
+    char var[100];
     char filename[200];
-    snprintf(filename, sizeof(filename), "QCM1_%s.txt", nom_qcm);
+    int c;
+
+    while ((c = getchar()) != '\n' && c != EOF);
+
+    printf("Saisir le nom du qcm : ");
+    fgets(var,100,stdin);
+    var[strcspn(var, "\n")] = '\0';
+    
+    snprintf(filename, sizeof(filename), "QCM1_%s.txt", var);
+
     FILE *f = fopen(filename, "w");
     if (f == NULL) {
         perror(filename);
         return;
     }
-    fprintf(f, "%s\n", nom_qcm);
+    fprintf(f, "%s\n", var);
     fclose(f);
+
+    f = fopen(filename, "a");
+    if (f != NULL) {
+        fprintf(f, "%d\n", t.choix1);
+        fprintf(f, "%d\n", t.choix2);
+        fprintf(f, "%d\n", t.choix3);
+        fclose(f);
+    }
+    else {
+            perror(filename);
+        }
+
 
     
 // creation du tableau des questions 
@@ -46,43 +65,40 @@ void creer_qcm1() {
     for (int i = 0; i < 5; i++) {
         
     //question
-        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_qst.txt", nom_qcm, i + 1);
-        f = fopen(filename, "w");
+        f = fopen(filename, "a");
         if (f != NULL) {
             printf("Saisir la question %d : ", i + 1);
-            scanf("%499s", questions[i].qst);
+            fgets(questions[i].qst, 500, stdin);
             fputs(questions[i].qst, f);
-            fclose(f);
-        } else {
-            perror(filename);
-        }
 
-    //boucle proposition
-        for (int j = 0; j < 4; j++) {
-            snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_prop%d.txt", nom_qcm, i + 1, j + 1);
-            f = fopen(filename, "w");
-            if (f != NULL) {
+            //boucle proposition
+            for (int j = 0; j < 4; j++) {
                 printf("Saisir la proposition %d pour la question %d : ", j + 1, i + 1);
                 // On utilise questions[i].propositions[j] grâce au tableau de tableaux
-                scanf("%499s", questions[i].propositions[j]);
+                fgets(questions[i].propositions[j],500,stdin);
                 fputs(questions[i].propositions[j], f);
-                fclose(f);
-            } else {
-                perror(filename);
-            }
-        }
+            } 
+            
 
-//reponse
-        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_reponse.txt", nom_qcm, i + 1);
-        f = fopen(filename, "w");
-        if (f != NULL) {
+        //reponse
             printf("Saisir la réponse pour la question %d : ", i + 1);
             scanf("%d", &questions[i].reponse);
-            fprintf(f, "%d", questions[i].reponse);
+            if (i != 4){
+                fprintf(f, "%d\n", questions[i].reponse);
+                while ((c = getchar()) != '\n' && c != EOF);
+            }
+            else {
+                fprintf(f, "%d", questions[i].reponse);
+                while ((c = getchar()) != '\n' && c != EOF);
+            }
             fclose(f);
-        } else {
+        } 
+
+        else {
             perror(filename);
         }
+
+    
     }
 
     free(questions);

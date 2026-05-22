@@ -15,53 +15,63 @@ void fonction_etudiant() {
         printf("erreur fichier");
         
     }
-do{
-    if (fgets(s,100,f) != NULL) {
-        printf("%d)  %s\n",i,s);
-        
-    i++; 
-    }
+    else {
+    do{
+        if (fgets(s,100,f) != NULL) {
+           printf("%d)  %s\n",i,s);
+            
+        i++; 
+        }
+        else{
+    break;
+        }
+
+    }while(1); 
+    fclose(f);
+    char tabq[i-1][100];
+    f = fopen("quizz.txt","r");
+
+    if (f == NULL){
+         printf("erreur fichier");
+
+        }
     else{
-   break;
+        char tabq[i-1][100];
+        int x = 0;
+        do{
+            if (fgets(s,100,f) != NULL) {
+                strcpy(tabq[x], s);
+            
+                x++; 
+            }
+            else{
+            break;
+            }
+
+        }while(1); 
+    fclose(f);
     }
 
-}while(1); 
-fclose(f);
-f = fopen("quizz.txt","r");
-char tabq[i-1];
-int x = 0;
-do{
-    if (fgets(s,100,f) != NULL) {
-        tabq[x] = s;
+    char nom_qcm[100];
+    for(int y = 0; y<i-1 ; y++){
+     if ( y == choix){
+           strcpy(nom_qcm, tabq[choix]);
+        }
+    }
+    char filename[200];
+    char w[100];
+    int rep, erep, res = 0;
+
+        for (int u = 0; u < 5; u++) {
         
-    x++; 
-    }
-    else{
-   break;
-    }
-
-}while(1); 
-fclose(f);
-
-char nom_qcm[100]
-for(int y = 0; y<i-1 ; y++){
-    if ( y == choix){
-        nom = tabq[choix]
-    }
-}
-int filename[200];
-char w[100];
-int rep, erep, res = 0;
-
-    for (int u = 0; u < 5; u++) {
-        
-        snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_qst.txt", nom_qcm, u + 1);
-        f = fopen(filename, "r");
-        if (f != NULL) {
-           fgets(w,100,f);
-           printf("\n\nQuestion %d : %s \n",u+1,w);
+            snprintf(filename, sizeof(filename), "QCM1_%s_Q%d_qst.txt", nom_qcm, u + 1);
+            f = fopen(filename, "r");
+            if (f != NULL) {
+            fgets(w,100,f);
+            printf("\n\nQuestion %d : %s \n",u+1,w);
             fclose(f);
-        } else {
+        } 
+        else {
             perror(filename);
         }
 
@@ -88,10 +98,7 @@ int rep, erep, res = 0;
         }
         else if(erep == 0){   
         }
-        else {
-            if(p3)
-            res--;
-        }
+        
             fclose(f);
         } else {
             perror(filename);
@@ -120,7 +127,7 @@ int rep, erep, res = 0;
 
 
 
-
+    }
     if (i == 1) {
         printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nAucun quizz disponible.\n");
         fclose(f);

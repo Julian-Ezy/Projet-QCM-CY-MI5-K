@@ -4,7 +4,7 @@
 #include "projet.h"
 
 typedef struct {
-    char qst[500];
+    char qst[200];
     char propositions[4][500]; 
     int reponses[2]; 
 } Question;
@@ -23,7 +23,7 @@ void creer_qcm2() {
     scanf("%99s", nom_qcm);
 
     char filename[200];
-    snprintf(filename, sizeof(filename), "QCM1_%s.txt", nom_qcm);
+    snprintf(filename, sizeof(filename), "QCM2_%s.txt", nom_qcm);
     FILE *f = fopen(filename, "w");
     if (f == NULL) {
         perror(filename);
