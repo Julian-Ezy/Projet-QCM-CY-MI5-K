@@ -10,13 +10,13 @@ void fonction_enseignant(char *mdp_ptr) {
     printf("Veuillez choisir \"1\" , \"2\" ou \"3\" : ");
     do{
         scanf("%d", &choix);
-        if (choix == 1) {
+        if (choix == 1) { //création qcm
             creer_qcm();
             return;
-        } else if (choix == 2) {
+        } else if (choix == 2) { //modification mdp
             modif_mdp(mdp_ptr);
             return;
-        } else if (choix == 3) {
+        } else if (choix == 3) { //retour en arrière
             enseignant_mdp(mdp_ptr);
             return;
         } else {

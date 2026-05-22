@@ -11,13 +11,15 @@ void choix_utilisateur(char *mdp_ptr) {
     printf("\nVous choisissez \"1\" , \"2\" ou \"3\" ? : ");
     do {
         scanf("%d", &choix);
-        if (choix == 1) {
+        if (choix == 1) { // selection par l'etudiant pour faire le quizz
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             fonction_etudiant();
-        } else if (choix == 2) {
+            return;
+        } else if (choix == 2) { //selection du mode enseignant
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             enseignant_mdp(mdp_ptr);
-        } else if (choix == 3) {
+            return;
+        } else if (choix == 3) { //retour en arrière (fonction main)
             return;
         } else {
             if (i == 0) {
@@ -35,5 +37,5 @@ void choix_utilisateur(char *mdp_ptr) {
             printf("3. Quitter\n");
             i++;
         }
-    } while (choix != 1 && choix != 2 && choix != 3);
+    } while (choix != 1 && choix != 2 && choix != 3);    
 }

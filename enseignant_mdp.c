@@ -9,10 +9,10 @@ void enseignant_mdp(char *mdp_ptr) {
         printf("Ou bien taper 0 pour revenir en arriere : ");
         do {
         scanf("%19s", rep);
-        if (strcmp(rep, mdp_ptr) == 0) {
+        if (strcmp(rep, mdp_ptr) == 0) { // comparaison de la chaine de caractère du vrai mdp et de celui saisi par l'utilisateur
             fonction_enseignant(mdp_ptr);
             return;
-        } else if (strcmp(rep, "0") == 0) {
+        } else if (strcmp(rep, "0") == 0) {//retour en arriere 
             choix_utilisateur(mdp_ptr);
             return;
         } else {
