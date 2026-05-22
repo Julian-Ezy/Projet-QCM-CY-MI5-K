@@ -59,7 +59,7 @@ void fonction_etudiant() {
         }
     }
     char filename[200];
-    int rep1,rep2, erep, res = 0;
+    int rep1,rep2, erep1,erep2, res = 0;
 
         snprintf(filename,sizeof(filename),"QCM1_%s.txt",nom_qcm);
 
@@ -68,26 +68,47 @@ printf("Lancement du quizz suivant : %s",filename);
 int propj,prop,count = 0;
 FILE* g;
 int p1,p2,p3;
-char h[100];
+char h[500];
 g = fopen(filename,"r");
     for(int o = 0; o<1;o++){
-        fgets(s,100,g);
+        fgets(h,500,g);
     }
-    for(int v = 0; v < 3; v++){
-        fscanf("%d",&p1);
-    }
+        fscanf(g,"%d",&p1);
+        fscanf(g,"%d",&p2);
+        fscanf(g,"%d",&p3);
+
     for(int i = 0; i<5; i++){
-        fgets(h,100,g);
+        fgets(h,500,g);
         printf("%de question : %s", i+1,h);
             
         for(int j = 0; j<4 ; j++){
-            fgets(h,100,g);
+            fgets(h,500,g);
             printf("%de proposition : %s \n ",j,h);
         }
-do{
-    printf("Saisir la proposition correcte : ");
-    scanf("%d",&erep);
-}while( erep<1 || erep>4);
+        if(p2 == 1){
+            printf("Saisir 0 si vous voulez passez la question");
+            if(p3 == 0){
+                do{
+                    printf("Saisir la proposition correcte : ");
+                    scanf("%d",&erep1);
+                }while( erep1<0 || erep1>4);
+            }
+            
+        }
+        else if (p2 == 0){
+
+        }
+        }
+
+        if(p3 == 0){
+            fscanf("%d",&rep1);
+        }
+        else if (p3 == 1){
+            fscanf(g,"%d",&rep1);
+            fscanf(g,"%d",&rep2);
+        }
+
+
  
 prop = fscanf("%d",&h);
 if (erep)
