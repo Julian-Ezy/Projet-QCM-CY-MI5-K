@@ -30,7 +30,7 @@ void creer_qcm1(Parametre t) {
     printf("Saisir le nom du qcm : ");
     fgets(var,100,stdin);
     var[strcspn(var, "\n")] = '\0';
-    
+
     snprintf(filename, sizeof(filename), "QCM1_%s.txt", var);
 
     FILE *f = fopen(filename, "w");
@@ -81,8 +81,10 @@ void creer_qcm1(Parametre t) {
             
 
         //reponse
+            do {
             printf("Saisir la réponse pour la question %d : ", i + 1);
             scanf("%d", &questions[i].reponse);
+            } while( questions[i].reponse < 1 || questions[i].reponse > 4);
             if (i != 4){
                 fprintf(f, "%d\n", questions[i].reponse);
                 while ((c = getchar()) != '\n' && c != EOF);
