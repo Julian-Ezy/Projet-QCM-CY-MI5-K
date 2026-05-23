@@ -8,7 +8,7 @@ void fonction_etudiant() {
     char s[100];
     int i = 1;
     int choix;
-    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoisir le quizz voulant etre fait\n");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoisir le quizz voulant etre fait : \n");
     FILE* f = fopen ("quizz.txt","r");
     
     if (f == NULL){
@@ -35,7 +35,6 @@ void fonction_etudiant() {
             fclose(f);
         }
         else{
-            char tabq[i-1][100];
             int x = 0;
             do{
                 if (fgets(s,100,f) != NULL) {
@@ -50,11 +49,18 @@ void fonction_etudiant() {
             }while(1); 
             fclose(f);
         }
+        printf("\n");
+        do{
+        scanf("%d", &choix);
+        if (choix <1 || choix > i-1){
+            printf("\nChoisir le quizz voulant être fait : \n");
+        }
+        }while(choix <1 || choix > i-1);
 
         char nom_qcm[100];
         for(int y = 0; y<i-1 ; y++){
-            if ( y == choix){
-                strcpy(nom_qcm, tabq[choix]);
+            if ( y == (choix - 1)){
+                strcpy(nom_qcm, tabq[choix - 1]);
             }
         }
         char filename[200];
@@ -62,12 +68,20 @@ void fonction_etudiant() {
 
         snprintf(filename,sizeof(filename),"QCM1_%s.txt",nom_qcm);
 
-        printf("Lancement du quizz suivant : %s",filename);
+        
+
+        printf("\n\n\n\n\n\n\n\n\n\n\n\nLancement du quizz suivant : \"%s\"\n",filename);
 
         FILE* g;
         int p1,p2,p3;
         char h[500];
         g = fopen(filename,"r");
+
+        if (f == NULL){
+            printf("erreur fichier");
+            fclose(f);
+        }
+
         for(int o = 0; o<1;o++){
             fgets(h,500,g);
         }
@@ -75,13 +89,15 @@ void fonction_etudiant() {
         fscanf(g,"%d",&p2);
         fscanf(g,"%d",&p3);
 
+
         for(int i = 0; i<5; i++){
+            fgetc(g);
             fgets(h,500,g);
-            printf("%de question : %s", i+1,h);
+            printf("\nQuestion n°%d : %s\n", i+1,h);
             
             for(int j = 0; j<4 ; j++){
                 fgets(h,500,g);
-                printf("%de proposition : %s \n ",j,h);
+                printf("Proposition n°%d : %s \n",j+1,h);
             }
             if(p3 == 0){
                 fscanf(g,"%d",&rep1);
@@ -93,10 +109,11 @@ void fonction_etudiant() {
             if(p2 == 1){
             
                 if(p3 == 0){
-                    printf("Saisir 0 si vous voulez passez la question");
+                    printf("Saisir 0 si vous voulez passez la question\n\n");
                     do{
                         printf("Saisir votre réponse : ");
                         scanf("%d",&erep1);
+                        printf("\n\n\n\n\n");
                     }while( erep1<0 || erep1>4);
                     if(erep1 == rep1){
                         res++;
@@ -122,11 +139,11 @@ void fonction_etudiant() {
                         printf("Saisir votre deuxième réponse : ");
                         scanf("%d",&erep2);
                     }while((erep2<0 || erep2>4) || ((erep2 == erep1) && (erep1 != 0)));
-                    if((erep1 == rep1) || erep1 == rep2){
+                    if((erep1 == rep1) || (erep1 == rep2)){
                         res++;
                     }
                     else if(p1 == 1){
-                        if(erep1 != rep1 && erep1 != rep2){
+                        if((erep1 != rep1) && (erep1 != rep2)){
                             if(erep1 == 0){
                                 res = res;
                             }
@@ -135,11 +152,11 @@ void fonction_etudiant() {
                             }
                         }
                     }
-                    if((erep2 == rep1) || erep2 == rep2){
+                    if((erep2 == rep1) || (erep2 == rep2)){
                         res++;
                     }
                     else if(p1 == 1){
-                        if(erep2 != rep1 && erep2 != rep2){
+                        if((erep2 != rep1) && (erep2 != rep2)){
                             if(erep2 == 0){
                                 res = res;
                             }
@@ -175,19 +192,19 @@ void fonction_etudiant() {
                         printf("Saisir votre deuxième réponse : ");
                         scanf("%d",&erep2);
                     }while( (erep2<1 || erep2>4) || (erep1 == erep2));
-                    if((erep1 == rep1) || erep1 == rep2){
+                    if((erep1 == rep1) || (erep1 == rep2)){
                         res++;
                     }
                     else if(p1 == 1){
-                        if(erep1 != rep1 && erep1 != rep2){
+                        if((erep1 != rep1) && (erep1 != rep2)){
                             res--;
                         }
                     }
-                    if((erep2 == rep1) || erep2 == rep2){
+                    if((erep2 == rep1) || (erep2 == rep2)){
                         res++;
                     }
                     else if(p1 == 1){
-                        if(erep2 != rep1 && erep2 != rep2){
+                        if((erep2 != rep1) && (erep2 != rep2)){
                             res--;
                         }
                     }
@@ -197,7 +214,7 @@ void fonction_etudiant() {
             }
         }
         fclose(g);
-        printf("Le QCM est terminée !");
+        printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nLe QCM est terminée !\n");
         if(p3 == 1){
             res = res * 2;
         }
@@ -207,15 +224,17 @@ void fonction_etudiant() {
         if (res < 0){
             res = 0;
         }
+        printf("\nVotre note est de %d/20 \n", res);
+        snprintf(h, sizeof(h), "%s\n%d/20",nom_qcm, res);
         FILE* k = fopen("Note.txt","a");
-        fprintf(k,"%d\n",res);
+        fprintf(k,"%s\n",h);
         fclose(k);
 
         } // fin du else (si le fichier des titres souvre)
     // si le fichier s'ouvre pas ou qu'il est vide alors on arrive ici directement)
     if (i == 1) {
         printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nAucun quizz disponible.\n");
-        
+    }
         
     int n, j = 0;
     do {
@@ -233,17 +252,10 @@ void fonction_etudiant() {
             else {
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoix invalide +%d.\n", i);
             }
-            if(i >= 50){
+            if(j >= 50){
                 printf("\nWow, ce type n'a rien d'autre à faire de sa journée\n");
             }
             j++;
         }
     } while (n != 1 && n != 2);
-        return;
-    }
-    do{ 
-        printf("Saisir le choix : ");
-            scanf ("%d",&choix);
-    }while(choix < 1 || choix >= i);
-    
 }

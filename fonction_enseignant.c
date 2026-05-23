@@ -26,7 +26,10 @@ void fonction_enseignant(char *mdp_ptr) {
             else {
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoix invalide +%d.\n", i);
             }
-            printf("\nVeuillez choisir \"1\" , \"2\" ou \"3\" : ");
+            if(i >= 50){
+                printf("\nWow, ce type n'a rien d'autre à faire de sa journée\n");
+            }
+            printf("\nVeuillez choisir \"1\" , \"2\" ou \"3\" : \n\n");
             printf("1. Créer un QCM\n");
             printf("2. Changer le mot de passe\n");
             printf("3. Revenir en arrière\n\n");

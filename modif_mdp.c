@@ -46,7 +46,7 @@ void modif_mdp(char *mdp_ptr) {
             if(i >= 50){
                 printf("\nWow, ce type n'a rien d'autre à faire de sa journée\n");
             }
-            printf("\nVeuillez choisir :\n\n \"1\" pour revenir au menu enseignant \n \"2\" pour revenir au menu principal\n\n");
+            printf("\nVeuillez choisir :\n\n\"1\" pour revenir au menu enseignant \n\"2\" pour revenir au menu principal\n\n");
             i++;
         }
     } while (n != 1 && n != 2);

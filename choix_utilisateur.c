@@ -31,7 +31,7 @@ void choix_utilisateur(char *mdp_ptr) {
             if(i >= 50){
                 printf("\nWow, ce type n'a rien d'autre à faire de sa journée\n");
             }
-            printf("\n Veuillez choisir \"1\" , \"2\" ou \"3\" : ");
+            printf("\nVeuillez choisir \"1\" , \"2\" ou \"3\" : \n");
             printf("\n1. Acceder au mode etudiant\n");
             printf("2. Acceder au mode enseignant\n");
             printf("3. Quitter\n");
