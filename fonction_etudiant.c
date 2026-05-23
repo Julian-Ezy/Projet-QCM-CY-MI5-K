@@ -7,7 +7,7 @@
 void fonction_etudiant() {
     char s[100];
     int i = 1;
-    int choix;
+    int choix, e;
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoisir le quizz voulant etre fait : \n");
     FILE* f = fopen ("quizz.txt","r");
     
@@ -88,12 +88,34 @@ void fonction_etudiant() {
         fscanf(g,"%d",&p1);
         fscanf(g,"%d",&p2);
         fscanf(g,"%d",&p3);
-
+        printf("\n-----ATTENTION-----\n");
+        if (p3 == 1){
+            printf("\nLa note est sur 10 et sera remise sur 20");
+        }
+        else if(p3 == 0){
+            printf("\nLa note est sur 5 et sera remise sur 20");
+        }
+        printf("\nUne réponse bonne vous donnera 1 point");
+        if(p1 == 1){
+            printf("\nUne réponse négative vous retirera 1 point");
+            printf("\nSi la note est inférieur à 0 elle vaudra un 0/20");
+        }
+        if(p2 == 1){
+            printf("\nVous pourrez choisir \"0\" si vous voulez passez la question et ne pas perdre de points");
+        }
+        do{
+            printf("\n\nPour commencer le QCM tapez \"1\" ou \"2\" sinon : ");
+            scanf("%d",&e);
+        }while((e != 1) && (e != 2));
+        if (e == 2){
+            fclose(g);
+            return;
+        }
 
         for(int i = 0; i<5; i++){
             fgetc(g);
             fgets(h,500,g);
-            printf("\nQuestion n°%d : %s\n", i+1,h);
+            printf("\n\n\n\n\n\n\n\n\n\nQuestion n°%d : %s\n", i+1,h);
             
             for(int j = 0; j<4 ; j++){
                 fgets(h,500,g);
@@ -238,7 +260,7 @@ void fonction_etudiant() {
         
     int n, j = 0;
     do {
-        printf("\nChoisissez :\n\n \"1\" pour revenir au menu etudiant \n \"2\" sinon\n\n");
+        printf("\nChoisissez :\n\n \"1\" pour revenir au menu etudiant \n\"2\" sinon\n\n");
         scanf("%d", &n);
         if (n == 1) {
             fonction_etudiant();
