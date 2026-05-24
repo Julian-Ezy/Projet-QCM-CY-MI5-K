@@ -2,6 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+// dossier brouillon utiliser au début 
+
+// NE PAS PRENDRE EN COMPTE
+
+
+
+
+
+
 typedef struct {
 int choix1;
 int choix2;
