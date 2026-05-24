@@ -31,7 +31,7 @@ void creer_qcm2(Parametre t) {
     var[strcspn(var, "\n")] = '\0';//remplace le saut de ligne par \0 (fin)
 
 
-    snprintf(filename, sizeof(filename), "QCM2_%s.txt", var);//ecrit dans la chaine filename le nom complet du qcm                                                           
+    snprintf(filename, sizeof(filename), "QCM_%s.txt", var);//ecrit dans la chaine filename le nom complet du qcm                                                           
 
     FILE *f = fopen(filename, "w");
     if (f == NULL) {

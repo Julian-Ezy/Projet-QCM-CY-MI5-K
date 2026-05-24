@@ -31,7 +31,7 @@ void creer_qcm1(Parametre t) {
     fgets(var,100,stdin); //ecrit dans la chaine de caractere ce que l'utilisateur a saisi
     var[strcspn(var, "\n")] = '\0'; //remplace le saut de ligne par \0 (fin)
 
-    snprintf(filename, sizeof(filename), "QCM1_%s.txt", var);//permet de mettre dans la chaine filename le nom du qcm
+    snprintf(filename, sizeof(filename), "QCM_%s.txt", var);//permet de mettre dans la chaine filename le nom du qcm
 
     FILE *f = fopen(filename, "w");
     if (f == NULL) {
@@ -46,7 +46,7 @@ void creer_qcm1(Parametre t) {
         perror(filename);
         return;
     }
-    fprintf(k, "%s\n", var);
+    fprintf(k, "\n%s", var);
     fclose(k);
 
     f = fopen(filename, "a");

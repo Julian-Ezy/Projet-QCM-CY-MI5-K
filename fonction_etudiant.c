@@ -66,10 +66,8 @@ void fonction_etudiant() {
 
         char filename[200];
         int rep1,rep2, erep1 = -1,erep2 = -1, res = 0;
-
-        snprintf(filename,sizeof(filename),"QCM1_%s.txt",nom_qcm);
-
         
+            snprintf(filename,sizeof(filename),"QCM_%s.txt",nom_qcm);
 
         printf("\n\n\n\n\n\n\n\n\n\n\n\nLancement du quizz suivant : \"%s\"\n",filename);
 
@@ -285,7 +283,7 @@ void fonction_etudiant() {
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoix invalide.\n");
             } 
             else {
-            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoix invalide +%d.\n", i);
+            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoix invalide +%d.\n", j);
             }
             if(j >= 50){
                 printf("\nWow, ce type n'a rien d'autre à faire de sa journée\n");
