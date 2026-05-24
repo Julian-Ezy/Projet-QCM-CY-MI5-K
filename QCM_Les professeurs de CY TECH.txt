@@ -14,7 +14,7 @@ Nguyen THI Hien
 Khabaz Sehla
 Dupont Emilie
 4
-Quelle est le prof de CM en informatique lors du 1er semestre de preing 1 ?
+Quelle est le prof de CM en informatique lors du 1er semestre de preing 1 (MI 5)?
 Grignon Romuald
 Ansermain Eva
 Begue Alexandre
@@ -26,9 +26,9 @@ Professeur Chen
 Passat Isabelle 
 Ben Mansour Amina
 2
-Lequelle de ces professeurs n'a pas de diplome ?
-De Vinci Léonard
-
-.
-.
+Lequelles de ces professeurs est tuteur du groupe MI5_2 ?
+Abdelmoula Nejib
+Mathieu Cisel 
+Avril Sophie
+Dupont Emilie
 1

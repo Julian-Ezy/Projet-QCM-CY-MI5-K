@@ -27,9 +27,13 @@ void modif_mdp(char *mdp_ptr) {
     fprintf(f, "%s", mdp_ptr);  // nouveau mdp écrit dans le fichier pour pouvoir le récupérer la prochaine fois
     fclose(f);
     printf("\nChoisissez :\n\n \"1\" pour revenir au menu enseignant \n \"2\" pour revenir au menu principal\n\n");
-    int n, i = 0;
+    int n = 0, verif, i = 0;
     do {
-        scanf("%d", &n);
+        verif = scanf("%d", &n);
+        while(getchar() != '\n');
+
+        if( verif == 1){
+
         if (n == 1) {
             fonction_enseignant(mdp_ptr);
             return;
@@ -49,5 +53,6 @@ void modif_mdp(char *mdp_ptr) {
             printf("\nVeuillez choisir :\n\n\"1\" pour revenir au menu enseignant \n\"2\" pour revenir au menu principal\n\n");
             i++;
         }
-    } while (n != 1 && n != 2);
+        }
+    } while ((n != 1 && n != 2) || verif != 1);
 }
