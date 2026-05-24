@@ -23,9 +23,8 @@ typedef struct {
 void creer_qcm2(Parametre t) {
     char var[100];
     char filename[200];
-    int c, verif;
+    int  verif;
 
-    while ((c = getchar()) != '\n' && c != EOF);
 
     printf("Saisir le nom du qcm : ");
     fgets(var,100,stdin);
@@ -48,7 +47,7 @@ void creer_qcm2(Parametre t) {
         remove(filename);
         return;
     }
-    fprintf(k, "%s\n", var);
+    fprintf(k, "\n%s", var);
     fclose(k);
 
     f = fopen(filename, "a");
@@ -70,7 +69,6 @@ void creer_qcm2(Parametre t) {
     Question *questions = malloc(5 * sizeof(Question));
     if (questions == NULL) {
         perror("Impossible d'allouer la mémoire");
-        fclose(f);
         remove(filename);
         return;
     }
@@ -100,7 +98,6 @@ void creer_qcm2(Parametre t) {
 
             } while( questions[i].reponses[0] < 1 || questions[i].reponses[0] > 4 || verif !=1 );
             fprintf(f, "%d\n", questions[i].reponses[0]);
-            while ((c = getchar()) != '\n' && c != EOF);
 
             do {
             printf("Saisir la réponse 2 pour la question %d : ", i + 1);
@@ -111,11 +108,9 @@ void creer_qcm2(Parametre t) {
             
             if (i != 4){
                 fprintf(f, "%d\n", questions[i].reponses[1]);//ecriture de la réponse dans le fichier + saut de ligne
-                while ((c = getchar()) != '\n' && c != EOF);
             }
             else {
                 fprintf(f, "%d", questions[i].reponses[1]);//si dernière question alors aucun saut de ligne pour ne pas la laissez vide
-                while ((c = getchar()) != '\n' && c != EOF);
             }
             fclose(f);
         } 

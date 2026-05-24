@@ -23,13 +23,13 @@ void creer_qcm1(Parametre t) {
 
     char var[100];
     char filename[200];
-    int c, verif;
+    int verif;
 
-    while ((c = getchar()) != '\n' && c != EOF); // permet de retirer les sauts de lignes des scanf précédents de la fonction paramètre_menu
+     // permet de retirer les sauts de lignes des scanf précédents de la fonction paramètre_menu
                                                  // obligatoire quand on alterne entre les scanf et les fgets car il ne récupère pas de la meme manière ce que tape l'utilisateur
                                                  // le scanf récupère les infos mais laisse le /n en attente (ne gêne pas car scanf ne prend pas les /n)
                                                  // le fgets récupère tout même le /n 
-    printf("Saisir le nom du qcm : ");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSaisir le nom du qcm : ");
     fgets(var,100,stdin); // ecrit dans la chaine de caractere ce que l'utilisateur va saisir
     var[strcspn(var, "\n")] = '\0'; //remplace le saut de ligne par \0 (fin), car le fgets récupère le \n (entrée) et on n'en veux pas pour le nom du qcm par la suite
 
@@ -72,8 +72,7 @@ void creer_qcm1(Parametre t) {
     Question *questions = malloc(5 * sizeof(Question)); // allocation de l'espace nécessaire 
 
     if (questions == NULL) { // si jamais ça échoue 
-        perror("Impossible d'allouer la mémoire"); // message d'erreur
-        fclose(f); // fermeture du fichier
+        perror("Impossible d'allouer la mémoire"); // message d'erreur 
         remove(filename); // effacement du fichier car sans suite
         return; // fin de la fonction ( retour dans le main)
     }
@@ -106,11 +105,9 @@ void creer_qcm1(Parametre t) {
 
             if (i != 4){
                 fprintf(f, "%d\n", questions[i].reponse); //ecrit la reponse i dans le fichier et saute une ligne
-                while ((c = getchar()) != '\n' && c != EOF);//
             }
             else {
                 fprintf(f, "%d", questions[i].reponse); //ecrit la dernière reponse sans saut de ligne pour ne pas avoir de ligne vide
-                while ((c = getchar()) != '\n' && c != EOF);
             }
             fclose(f);
         } 

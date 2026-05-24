@@ -59,14 +59,14 @@ void fonction_etudiant() {
         while(getchar() != '\n');
 
         if (choix <1 || choix > i-1 || verif != 1){
-            printf("\nChoisir le quizz voulant être fait : \n");
+            printf("\nChoisir le quizz voulant être fait : \n\n");
         }
         }while(choix <1 || choix > i-1 || verif != 1);
 
         char nom_qcm[100];
 
         strcpy(nom_qcm, tabq[choix - 1]); // variable nom_qcm prend le nom du qcm choisis
-        
+        nom_qcm[strcspn(nom_qcm, "\n")] = '\0'; // remplacer les "\n" potentiels par des "\0"
 
         char filename[200];
         int rep1,rep2, erep1 = -1,erep2 = -1, res = 0;
@@ -147,7 +147,7 @@ void fonction_etudiant() {
                         res++;
                     }
                     else if(p1 == 1){ // si p1 = 1
-                        if(erep1 != rep1) // -1 si mauvaise
+                        if(erep1 != rep1){ // -1 si mauvaise
                             if(erep1 == 0){ // sauf si 0
                                 res = res;
                             }
