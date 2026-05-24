@@ -14,13 +14,13 @@ void fonction_enseignant(char *mdp_ptr) {
 
         if( verif == 1 ){
 
-        if (choix == 1) { //création qcm
+        if (choix == 1) { // création qcm
             creer_qcm();
             return;
-        } else if (choix == 2) { //modification mdp
+        } else if (choix == 2) { // modification mdp
             modif_mdp(mdp_ptr);
             return;
-        } else if (choix == 3) { //retour en arrière
+        } else if (choix == 3) { // retour en arrière
             enseignant_mdp(mdp_ptr);
             return;
         } else {

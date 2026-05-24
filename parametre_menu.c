@@ -8,22 +8,24 @@ do{
         printf("---------- PARAMETRES --------- \n");
     do{
         printf (" Paramètre 1 : Voulez vous ajoutez la possibilité de mettre des points négatifs\n");
-            printf( " Si oui saisir 1 sinon 0\n");
-            scanf("%d",&t.choix1);
+        printf( " Si oui saisir 1 sinon 0\n");
+        scanf("%d",&t.choix1);
     }while(t.choix1 != 0 && t.choix1 != 1);
 
     do{
         printf (" Paramètre 2 : Voulez vous ajouter la possibilité de passer les questions\n");
-            printf( " Si oui saisir 1 sinon 0\n");
-            scanf("%d",&t.choix2);
+        printf( " Si oui saisir 1 sinon 0\n");
+        scanf("%d",&t.choix2);
     }while(t.choix2 != 0 && t.choix2 != 1);
 
     do{
         printf (" Paramètre 3 : Voulez vous ajouter la possibilité de mettre plusieurs propositions\n");
-            printf( " Si oui saisir 1 sinon 0\n");
-            scanf("%d",&t.choix3);
+        printf (" Il y aura 2 bonnes réponses sur 4");
+        printf( " Si oui saisir 1 sinon 0\n");
+        scanf("%d",&t.choix3);
     }while(t.choix3 != 0 && t.choix3 != 1);
 
+        printf(" Un QCM contient 5 questiond et 4 propositions chacune")
         printf("Les paramètres vous conviennent ils ?\n");
         printf(" Si oui saisir 1, sinon 0\n");
     scanf("%d",&confirmation);
