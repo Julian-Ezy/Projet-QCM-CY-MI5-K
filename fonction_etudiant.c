@@ -7,7 +7,7 @@
 void fonction_etudiant() {
     char s[100];
     int i = 1;
-    int choix, e;
+    int choix = 0, e, vérif;
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoisir le quizz voulant etre fait : \n");
     FILE* f = fopen ("quizz.txt","r");
     
@@ -51,11 +51,13 @@ void fonction_etudiant() {
         }
         printf("\n");
         do{
-        scanf("%d", &choix);
-        if (choix <1 || choix > i-1){
+        verif = scanf("%d", &choix);
+        while(getchar() != '\n');
+
+        if (choix <1 || choix > i-1 || verif != 1){
             printf("\nChoisir le quizz voulant être fait : \n");
         }
-        }while(choix <1 || choix > i-1);
+        }while(choix <1 || choix > i-1 || verif != 1);
 
         char nom_qcm[100];
         for(int y = 0; y<i-1 ; y++){
@@ -64,7 +66,7 @@ void fonction_etudiant() {
             }
         }
         char filename[200];
-        int rep1,rep2, erep1,erep2, res = 0;
+        int rep1,rep2, erep1 = -1,erep2 = -1, res = 0;
 
         snprintf(filename,sizeof(filename),"QCM1_%s.txt",nom_qcm);
 
@@ -88,6 +90,7 @@ void fonction_etudiant() {
         fscanf(g,"%d",&p1);
         fscanf(g,"%d",&p2);
         fscanf(g,"%d",&p3);
+
         printf("\n-----ATTENTION-----\n");
         if (p3 == 1){
             printf("\nLa note est sur 10 et sera remise sur 20");
@@ -105,8 +108,9 @@ void fonction_etudiant() {
         }
         do{
             printf("\n\nPour commencer le QCM tapez \"1\" ou \"2\" sinon : ");
-            scanf("%d",&e);
-        }while((e != 1) && (e != 2));
+            verif = scanf("%d",&e);
+            while(getchar() != '\n');
+        }while((e != 1 && e != 2) || verif != 1);
         if (e == 2){
             fclose(g);
             return;
@@ -134,9 +138,10 @@ void fonction_etudiant() {
                     printf("Saisir 0 si vous voulez passez la question\n\n");
                     do{
                         printf("Saisir votre réponse : ");
-                        scanf("%d",&erep1);
+                        verif = scanf("%d",&erep1);
+                        while(getchar() != '\n');
                         printf("\n\n\n\n\n");
-                    }while( erep1<0 || erep1>4);
+                    }while( erep1<0 || erep1>4 || verif != 1);
                     if(erep1 == rep1){
                         res++;
                     }
@@ -155,12 +160,14 @@ void fonction_etudiant() {
                     printf("Saisir deux fois 0 si vous voulez passez la question");
                     do{
                         printf("Saisir votre première réponse : ");
-                        scanf("%d",&erep1);
-                    }while( erep1<0 || erep1>4);
+                        verif = scanf("%d",&erep1);
+                        while(getchar() != '\n');
+                    }while( erep1<0 || erep1>4 || verif != 1);
                     do{ 
                         printf("Saisir votre deuxième réponse : ");
-                        scanf("%d",&erep2);
-                    }while((erep2<0 || erep2>4) || ((erep2 == erep1) && (erep1 != 0)));
+                        verif = scanf("%d",&erep2);
+                        while(getchar() != '\n');
+                    }while((erep2<0 || erep2>4) || ((erep2 == erep1) && (erep1 != 0)) || verif !=1);
                     if((erep1 == rep1) || (erep1 == rep2)){
                         res++;
                     }

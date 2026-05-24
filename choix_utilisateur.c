@@ -2,7 +2,7 @@
 #include "projet.h"
 
 void choix_utilisateur(char *mdp_ptr) {
-    int choix, i = 0;
+    int choix = 0,verif, i = 0;
 
     printf("\n\n\n\n\n\n\n\n\n\n\n\nChoisissez une option :\n");
     printf("\n1. Acceder au mode etudiant\n");
@@ -10,7 +10,11 @@ void choix_utilisateur(char *mdp_ptr) {
     printf("3. Quitter\n");
     printf("\nVous choisissez \"1\" , \"2\" ou \"3\" ? : ");
     do {
-        scanf("%d", &choix);
+        verif = scanf("%d", &choix);
+        while(getchar() != '\n');
+        
+        if ( verif == 1){
+
         if (choix == 1) { // selection par l'etudiant pour faire le quizz
             printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             fonction_etudiant();
@@ -37,5 +41,6 @@ void choix_utilisateur(char *mdp_ptr) {
             printf("3. Quitter\n");
             i++;
         }
-    } while (choix != 1 && choix != 2 && choix != 3);    
+        }
+    } while ((choix != 1 && choix != 2 && choix != 3) || verif != 1);    
 }
