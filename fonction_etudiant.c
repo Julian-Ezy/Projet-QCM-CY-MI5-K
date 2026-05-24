@@ -27,9 +27,8 @@ void fonction_etudiant() {
 
         }while(1); 
         fclose(f);
-        if (i != 1){
         char tabq[i-1][100];
-        }
+        
         f = fopen("quizz.txt","r");
 
         if (f == NULL){
@@ -63,6 +62,7 @@ void fonction_etudiant() {
         char nom_qcm[100];
 
         strcpy(nom_qcm, tabq[choix - 1]);
+        
 
         char filename[200];
         int rep1,rep2, erep1 = -1,erep2 = -1, res = 0;
