@@ -7,7 +7,7 @@
 void fonction_etudiant() {
     char s[100];
     int i = 1;
-    int choix = 0, e, vérif;
+    int choix = 0, e, verif;
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nChoisir le quizz voulant etre fait : \n");
     FILE* f = fopen ("quizz.txt","r");
     
@@ -27,12 +27,13 @@ void fonction_etudiant() {
 
         }while(1); 
         fclose(f);
+        if (i != 1){
         char tabq[i-1][100];
+        }
         f = fopen("quizz.txt","r");
 
         if (f == NULL){
             printf("erreur fichier");
-            fclose(f);
         }
         else{
             int x = 0;
@@ -60,11 +61,9 @@ void fonction_etudiant() {
         }while(choix <1 || choix > i-1 || verif != 1);
 
         char nom_qcm[100];
-        for(int y = 0; y<i-1 ; y++){
-            if ( y == (choix - 1)){
-                strcpy(nom_qcm, tabq[choix - 1]);
-            }
-        }
+
+        strcpy(nom_qcm, tabq[choix - 1]);
+
         char filename[200];
         int rep1,rep2, erep1 = -1,erep2 = -1, res = 0;
 
@@ -79,11 +78,10 @@ void fonction_etudiant() {
         char h[500];
         g = fopen(filename,"r");
 
-        if (f == NULL){
+        if (g == NULL){
             printf("erreur fichier");
-            fclose(f);
         }
-
+        else{
         for(int o = 0; o<1;o++){
             fgets(h,500,g);
         }
@@ -201,8 +199,9 @@ void fonction_etudiant() {
                 if(p3 == 0){
                     do{
                         printf("Saisir votre réponse : ");
-                        scanf("%d",&erep1);
-                    }while( erep1<1 || erep1>4);
+                        verif = scanf("%d",&erep1);
+                        while(getchar() != '\n');
+                    }while( erep1<1 || erep1>4 || verif != 1);
                         if(erep1 == rep1){
                             res++;
                         }
@@ -215,12 +214,14 @@ void fonction_etudiant() {
                 else if(p3 == 1){
                     do{
                         printf("Saisir votre première réponse : ");
-                        scanf("%d",&erep1);
-                    }while( erep1<1 || erep1>4);
+                        verif = scanf("%d",&erep1);
+                        while(getchar() != '\n');
+                    }while( erep1<1 || erep1>4 || verif != 1);
                     do{ 
                         printf("Saisir votre deuxième réponse : ");
-                        scanf("%d",&erep2);
-                    }while( (erep2<1 || erep2>4) || (erep1 == erep2));
+                        verif = scanf("%d",&erep2);
+                        while(getchar() != '\n');
+                    }while( (erep2<1 || erep2>4) || (erep1 == erep2) || verif != 1);
                     if((erep1 == rep1) || (erep1 == rep2)){
                         res++;
                     }
@@ -256,10 +257,13 @@ void fonction_etudiant() {
         printf("\nVotre note est de %d/20 \n", res);
         snprintf(h, sizeof(h), "%s\n%d/20",nom_qcm, res);
         FILE* k = fopen("Note.txt","a");
+        if (k != NULL){
         fprintf(k,"%s\n",h);
         fclose(k);
+        }
+        } // fin du else (si le fichier du QCM s'ouvre)
 
-        } // fin du else (si le fichier des titres souvre)
+        } // fin du else (si le fichier des titres s'ouvre)
     // si le fichier s'ouvre pas ou qu'il est vide alors on arrive ici directement)
     if (i == 1) {
         printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\nAucun quizz disponible.\n");
@@ -268,11 +272,13 @@ void fonction_etudiant() {
     int n, j = 0;
     do {
         printf("\nChoisissez :\n\n \"1\" pour revenir au menu etudiant \n\"2\" sinon\n\n");
-        scanf("%d", &n);
-        if (n == 1) {
+        verif = scanf("%d", &n);
+        while(getchar() != '\n');
+
+        if (n == 1 && verif == 1) {
             fonction_etudiant();
             return;
-        } else if (n == 2) {
+        } else if (n == 2 && verif == 1) {
             return;
         } else {
             if (j == 0) {
@@ -286,5 +292,5 @@ void fonction_etudiant() {
             }
             j++;
         }
-    } while (n != 1 && n != 2);
+    } while ((n != 1 && n != 2) || verif != 1);
 }
